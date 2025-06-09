@@ -1,0 +1,5 @@
+#!/bin/bash
+
+lein install
+
+echo "To release, you will need to run 'lein deploy clojars'"

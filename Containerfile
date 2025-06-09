@@ -12,8 +12,12 @@ RUN git clone https://github.com/openvoxproject/ezbake
 RUN cd /ezbake && lein install
 
 RUN mkdir /code
+
 COPY scripts/build-puppetserver /usr/local/bin
 RUN chmod 755 /usr/local/bin/build-puppetserver
+
+COPY scripts/build-trapperkeeper-webserver-jetty9 /usr/local/bin
+RUN chmod 755 /usr/local/bin/build-trapperkeeper-webserver-jetty9
 
 RUN git config --global user.email "temp@example.com"
 RUN git config --global user.name "Temp User"

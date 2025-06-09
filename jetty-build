@@ -1,0 +1,12 @@
+#!/bin/bash
+
+PROJECT="trapperkeeper-webserver-jetty9"
+
+mkdir -p builds
+if [ ! -d "builds/$PROJECT" ]; then
+    cd builds && git clone "$PROJECT"
+fi
+
+pushd "builds/$PROJECT"
+git checkout patches
+podman run --volume ./:/code:Z --workdir /code ezbake-builder "build-$PROJECT"
