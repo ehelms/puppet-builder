@@ -1,0 +1,11 @@
+#!/bin/bash
+
+mkdir -p builds
+if [ ! -d "builds/puppetserver" ]; then
+    cd builds && git clone https://github.com/ehelms/puppetserver
+fi
+
+pushd builds/puppetserver
+git checkout 7.x-patches
+mkdir -p output
+podman run --volume ./:/code:Z --workdir /code ezbake-builder build-puppetserver
