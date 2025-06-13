@@ -1,11 +1,13 @@
 #!/bin/bash
 
+PROJECT="puppetserver"
+
 mkdir -p builds
-if [ ! -d "builds/puppetserver" ]; then
-    cd builds && git clone https://github.com/ehelms/puppetserver
+if [ ! -d "builds/$PROJECT" ]; then
+    cd builds && git clone "https://github.com/ehelms/$PROJECT"
 fi
 
-pushd builds/puppetserver
+cd "$PROJECT"
 git checkout 7.x-patches
 mkdir -p output
-podman run --volume ./:/code:Z --workdir /code ezbake-builder build-puppetserver
+podman run --volume ./:/code:Z --workdir /code ezbake-builder:7 "build-$PROJECT"

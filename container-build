@@ -1,3 +1,3 @@
 #!/bin/bash
 
-podman build -t ezbake-builder .
+podman build -t ezbake-builder:7 .
