@@ -2,10 +2,12 @@
 
 mkdir -p builds
 if [ ! -d "builds/puppetserver" ]; then
-    cd builds && git clone https://github.com/ehelms/puppetserver
+    pushd builds
+    git clone https://github.com/ehelms/puppetserver
+    popd
 fi
 
-pushd builds/puppetserver
+cd builds/puppetserver
 git checkout 7.x-patches
 mkdir -p output
 podman run --volume ./:/code:Z --workdir /code ezbake-builder build-puppetserver
