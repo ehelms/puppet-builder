@@ -4,10 +4,12 @@ PROJECT="puppetserver"
 
 mkdir -p builds
 if [ ! -d "builds/$PROJECT" ]; then
-    cd builds && git clone "https://github.com/ehelms/$PROJECT"
+    pushd builds
+    git clone "https://github.com/ehelms/$PROJECT"
+    popd
 fi
 
-cd "$PROJECT"
+cd "builds/$PROJECT"
 git checkout 7.x-patches
 mkdir -p output
 podman run --volume ./:/code:Z --workdir /code ezbake-builder:7 "build-$PROJECT"
